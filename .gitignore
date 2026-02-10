@@ -26,5 +26,8 @@ venv/
 # Environment variables
 .env
 
+# chroma db
+chroma_db/
+
 # assetes
 assetes/
