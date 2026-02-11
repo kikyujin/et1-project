@@ -43,7 +43,7 @@ cp .env.example .env
 第5話からは追加パッケージが必要です。
 
 ```bash
-pip install chromadb
+pip install chromadb umap-learn matplotlib
 ```
 
 ---
@@ -76,7 +76,13 @@ pip install chromadb
 | ファイル | 内容 |
 |---------|------|
 | `search_logs.py` | ChromaDB + Gemini Embedding API で航海ログをベクトル検索 |
-| `logs/` | 検索対象の航海ログ（EP00〜04のクリーン版） |
+| `logs/` | 検索対象の航海ログ（EP00〜05のクリーン版） |
+
+### 第6話「アーカイブ星系② — 768次元の星空を紙の上に」
+
+| ファイル | 内容 |
+|---------|------|
+| `visualize_logs.py` | ChromaDBのベクトルをUMAPで2次元投影 → 散布図を描画 |
 
 ## 使い方
 
@@ -126,6 +132,19 @@ python search_logs.py "水着の写真を分類"
 python search_logs.py --rebuild
 ```
 
+### visualize_logs.py（第6話）
+
+```bash
+# 散布図を表示（chroma_db/ が構築済みなら即実行可能）
+python visualize_logs.py
+
+# PNGファイルとして保存
+python visualize_logs.py --save
+
+# DB再構築してから可視化（ログを追加した時）
+python visualize_logs.py --rebuild --save
+```
+
 ## 💡 Tips
 
 - **テスト用の画像は小さめに**：640x1024程度でOK。大きい画像はトークン消費が増えます
@@ -138,7 +157,7 @@ python search_logs.py --rebuild
 |------|------|
 | OS | Linux Mint 22.3 Xfce / WSL2 Ubuntu |
 | Python | 3.12 |
-| モデル | gemini-2.5-flash-lite（第3〜4話）、gemini-embedding-001（第5話） |
+| モデル | gemini-2.5-flash-lite（第3〜4話）、gemini-embedding-001（第5〜6話） |
 | 検証機 | Panasonic Let's note CF-SV7 |
 
 ---
