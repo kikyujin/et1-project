@@ -84,6 +84,13 @@ pip install chromadb umap-learn matplotlib
 |---------|------|
 | `visualize_logs.py` | ChromaDBのベクトルをUMAPで2次元投影 → 散布図を描画 |
 
+### 第7話「アーカイブ星系③ — 記録と対話する（RAG）」
+
+| ファイル | 内容 |
+|---------|------|
+| `ask_logs.py` | ChromaDBで検索 → Gemini APIで回答生成（RAG） |
+| `logs/` | 航海ログ＋キャラプロフィール＋設定資料（17ファイル） |
+
 ## 使い方
 
 ### hello-gemini.py（第2話）
@@ -145,11 +152,43 @@ python visualize_logs.py --save
 python visualize_logs.py --rebuild --save
 ```
 
+### ask_logs.py（第7話）
+
+```bash
+# 初回実行：DB構築 → 対話モード
+python ask_logs.py --rebuild
+
+# 単発質問
+python ask_logs.py "ノクちんの一人称は？"
+python ask_logs.py "ボソミオン通信って何？"
+python ask_logs.py "エルマーのしっぽはどうなると感情MAX？"
+
+# 対話モード（引数なしで起動）
+python ask_logs.py
+
+# DB再構築してから質問（ログやプロフィールを追加・変更した時）
+python ask_logs.py --rebuild "ダンチャンの正式名称は？"
+```
+
+#### キャラクター設定を変えてみよう！
+
+ask_logs.py の `CHARACTER_PROMPT` を書き換えるだけで、答えてくれるキャラが変わります。
+
+```python
+# 例：エルマーに変更
+CHARACTER_PROMPT = """\
+あなたはエルマー、ElmarTail OneのアシスタントAIです。
+明るく元気な口調で回答してください。
+一人称は「ボク」。質問者のことは「にーに」と呼びます。
+"""
+```
+
 ## 💡 Tips
 
 - **テスト用の画像は小さめに**：640x1024程度でOK。大きい画像はトークン消費が増えます
 - **無料枠の制限**：flash-lite は1分10回、1日20回程度。大量処理には課金を検討してください
 - **課金しても最初は$300の無料クレジット**（90日間）が付きます。写真分類程度では使い切れません
+- **RAGのコツ**：logs/ に自分の文書（Markdown）を追加して `--rebuild` すれば、自分だけのナレッジベースAIになります
 
 ## 動作環境
 
@@ -157,7 +196,7 @@ python visualize_logs.py --rebuild --save
 |------|------|
 | OS | Linux Mint 22.3 Xfce / WSL2 Ubuntu |
 | Python | 3.12 |
-| モデル | gemini-2.5-flash-lite（第3〜4話）、gemini-embedding-001（第5〜6話） |
+| モデル | gemini-2.5-flash-lite（第3〜4話、第7話）、gemini-embedding-001（第5〜7話） |
 | 検証機 | Panasonic Let's note CF-SV7 |
 
 ---
