@@ -1,0 +1,144 @@
+---
+const { frontmatter } = Astro.props;
+const dateStr = new Date(frontmatter.date).toLocaleDateString('ja-JP', {
+  year: 'numeric', month: 'long', day: 'numeric'
+});
+---
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{frontmatter.title} - ElmarTail One</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Source+Code+Pro:wght@400;600&display=swap');
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: 'Noto Sans JP', sans-serif;
+        background: #0a0e17;
+        color: #e0e0e0;
+        line-height: 1.8;
+      }
+
+      header {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b2d4f 100%);
+        border-bottom: 2px solid #2a4a7f;
+        padding: 1.5rem 2rem;
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+        color: #7eb8ff;
+      }
+
+      header nav a {
+        color: #7eb8ff;
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+
+      header nav a:hover { text-decoration: underline; }
+
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      article h2 {
+        color: #7eb8ff;
+        font-size: 1.6rem;
+        margin-bottom: 0.5rem;
+      }
+
+      article time {
+        display: block;
+        color: #888;
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #1e2d3d;
+      }
+
+      article :global(h1) {
+        color: #ffffff;
+        font-size: 1.8rem;
+        margin: 2rem 0 1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #2a4a7f;
+      }
+
+      article :global(h2) {
+        color: #7eb8ff;
+        font-size: 1.4rem;
+        margin: 2rem 0 0.8rem;
+      }
+
+      article :global(h3) {
+        color: #a0c4ff;
+        font-size: 1.2rem;
+        margin: 1.5rem 0 0.5rem;
+      }
+
+      article :global(p) {
+        margin-bottom: 1rem;
+      }
+
+      article :global(blockquote) {
+        border-left: 3px solid #7eb8ff;
+        padding: 0.8rem 1.2rem;
+        margin: 1rem 0;
+        background: #111827;
+        border-radius: 0 8px 8px 0;
+        color: #b0b0b0;
+      }
+
+      article :global(pre) {
+        background: #111827;
+        border: 1px solid #1e2d3d;
+        border-radius: 8px;
+        padding: 1.2rem;
+        overflow-x: auto;
+        margin: 1rem 0;
+        font-family: 'Source Code Pro', monospace;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      article :global(code) {
+        font-family: 'Source Code Pro', monospace;
+        font-size: 0.9rem;
+      }
+
+      article :global(:not(pre) > code) {
+        background: #1e2d3d;
+        padding: 0.15rem 0.4rem;
+        border-radius: 4px;
+        color: #a0c4ff;
+      }
+
+      article :global(a) {
+        color: #7eb8ff;
+        text-decoration: none;
+      }
+
+      article :global(a:hover) {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>🚀 ElmarTail One</h1>
+      <nav><a href="/">← 航海記録トップ</a></nav>
+    </header>
+    <main>
+      <article>
+        <h2>{frontmatter.title}</h2>
+        <time>Episode {frontmatter.episode} — {dateStr}</time>
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,96 @@
+---
+const posts = await Astro.glob('./posts/*.md');
+const sortedPosts = posts.sort((a, b) => 
+  b.frontmatter.episode - a.frontmatter.episode
+);
+---
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>ElmarTail One - 航海記録</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+
+      body {
+        font-family: 'Noto Sans JP', sans-serif;
+        background: #0a0e17;
+        color: #e0e0e0;
+        line-height: 1.8;
+      }
+
+      header {
+        background: linear-gradient(135deg, #0d1b2a 0%, #1b2d4f 100%);
+        border-bottom: 2px solid #2a4a7f;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      header h1 {
+        font-size: 2rem;
+        color: #7eb8ff;
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        color: #888;
+        font-size: 0.95rem;
+      }
+
+      main {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .post-card {
+        display: block;
+        background: #111827;
+        border: 1px solid #1e2d3d;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        text-decoration: none;
+        color: inherit;
+        transition: border-color 0.2s, transform 0.2s;
+      }
+
+      .post-card:hover {
+        border-color: #7eb8ff;
+        transform: translateY(-2px);
+      }
+
+      .post-card h2 {
+        color: #7eb8ff;
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+      }
+
+      .post-card time {
+        color: #666;
+        font-size: 0.85rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>🚀 ElmarTail One</h1>
+      <p>かつてのエースプログラマが、AI娘たちと巡る現代テック宇宙の旅。</p>
+    </header>
+    <main>
+      {sortedPosts.map(post => {
+        const dateStr = new Date(post.frontmatter.date).toLocaleDateString('ja-JP', {
+          year: 'numeric', month: 'long', day: 'numeric'
+        });
+        return (
+          <a class="post-card" href={post.url}>
+            <h2>第{post.frontmatter.episode}話: {post.frontmatter.title}</h2>
+            <time>{dateStr}</time>
+          </a>
+        );
+      })}
+    </main>
+  </body>
+</html>

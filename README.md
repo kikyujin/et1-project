@@ -183,6 +183,31 @@ CHARACTER_PROMPT = """\
 """
 ```
 
+### 第8話「git の正体を知る！『航海日誌』」
+
+Gitのローカル操作の説明回です。新規ファイルはありません。
+第7話までのリポジトリを `git clone` してそのまま使ってください。
+
+### 第9話「バエる航海記録 — Astro」
+
+| ディレクトリ | 内容 |
+|-------------|------|
+| `my-et1-site/` | Astroサイトのサンプル（航海ログをWebサイト化） |
+
+```bash
+# Node.js のインストール（nvm経由）
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+
+# ローカルプレビュー
+cd my-et1-site
+npm install
+npm run dev   # → localhost:4321
+```
+
+---
+
 ## 💡 Tips
 
 - **テスト用の画像は小さめに**：640x1024程度でOK。大きい画像はトークン消費が増えます
@@ -197,6 +222,7 @@ CHARACTER_PROMPT = """\
 | OS | Linux Mint 22.3 Xfce / WSL2 Ubuntu |
 | Python | 3.12 |
 | モデル | gemini-2.5-flash-lite（第3〜4話、第7話）、gemini-embedding-001（第5〜7話） |
+| Node.js | LTS版（第9話、nvm経由） |
 | 検証機 | Panasonic Let's note CF-SV7 |
 
 ---
